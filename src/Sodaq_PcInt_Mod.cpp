@@ -50,20 +50,20 @@
 #include <avr/interrupt.h>
 #include <Arduino.h>
 
-#include "Sodaq_PcInt.h"
+#include "Sodaq_PcInt_Mod.h"
 
 #if defined(PCINT0_vect)
 void   (*PcInt::_funcs0[8])(void);
 #endif
-#if defined(PCINT1_vect)
-void   (*PcInt::_funcs1[8])(void);
-#endif
-#if defined(PCINT2_vect)
-void   (*PcInt::_funcs2[8])(void);
-#endif
-#if defined(PCINT3_vect)
-void   (*PcInt::_funcs3[8])(void);
-#endif
+//#if defined(PCINT1_vect)
+//void   (*PcInt::_funcs1[8])(void);
+//#endif
+//#if defined(PCINT2_vect)
+//void   (*PcInt::_funcs2[8])(void);
+//#endif
+//#if defined(PCINT3_vect)
+//void   (*PcInt::_funcs3[8])(void);
+//#endif
 
 /*
  * Set the function pointer in the array using the port's pin bit mask
@@ -92,21 +92,21 @@ void PcInt::attachInterrupt(uint8_t pin, void (*func)(void))
       setFunc(_funcs0, portBitMask, func);
       break;
 #endif
-#if defined(PCINT1_vect)
-    case 1:
-      setFunc(_funcs1, portBitMask, func);
-      break;
-#endif
-#if defined(PCINT2_vect)
-    case 2:
-      setFunc(_funcs2, portBitMask, func);
-      break;
-#endif
-#if defined(PCINT3_vect)
-    case 3:
-      setFunc(_funcs3, portBitMask, func);
-      break;
-#endif
+//#if defined(PCINT1_vect)
+//    case 1:
+//      setFunc(_funcs1, portBitMask, func);
+//      break;
+//#endif
+//#if defined(PCINT2_vect)
+//    case 2:
+//      setFunc(_funcs2, portBitMask, func);
+//      break;
+//#endif
+//#if defined(PCINT3_vect)
+//    case 3:
+//      setFunc(_funcs3, portBitMask, func);
+//      break;
+//#endif
     }
     *pcmsk |= _BV(digitalPinToPCMSKbit(pin));
     *pcicr |= _BV(digitalPinToPCICRbit(pin));
@@ -116,22 +116,6 @@ void PcInt::attachInterrupt(uint8_t pin, void (*func)(void))
 void PcInt::detachInterrupt(uint8_t pin)
 {
   //_funcs[pin] = 0;
-}
-
-void PcInt::enableInterrupt(uint8_t pin)
-{
-  volatile uint8_t * pcmsk = digitalPinToPCMSK(pin);
-  if (pcmsk) {
-    *pcmsk |= _BV(digitalPinToPCMSKbit(pin));
-  }
-}
-
-void PcInt::disableInterrupt(uint8_t pin)
-{
-  volatile uint8_t * pcmsk = digitalPinToPCMSK(pin);
-  if (pcmsk) {
-    *pcmsk &= ~_BV(digitalPinToPCMSKbit(pin));
-  }
 }
 
 /*
@@ -149,21 +133,21 @@ void (*PcInt::getFunc(uint8_t group, uint8_t nr))(void)
   case 0:
     funcs = _funcs0;
     break;
-#if defined(PCINT1_vect)
-  case 1:
-    funcs = _funcs1;
-    break;
-#endif
-#if defined(PCINT2_vect)
-  case 2:
-    funcs = _funcs2;
-    break;
-#endif
-#if defined(PCINT3_vect)
-  case 3:
-    funcs = _funcs3;
-    break;
-#endif
+//#if defined(PCINT1_vect)
+//  case 1:
+//    funcs = _funcs1;
+//    break;
+//#endif
+//#if defined(PCINT2_vect)
+//  case 2:
+//    funcs = _funcs2;
+//    break;
+//#endif
+//#if defined(PCINT3_vect)
+//  case 3:
+//    funcs = _funcs3;
+//    break;
+//#endif
   default:
     return 0;
     break;
@@ -172,7 +156,7 @@ void (*PcInt::getFunc(uint8_t group, uint8_t nr))(void)
 }
 
 #if defined(PCINT0_vect)
-inline void PcInt::handlePCINT0()
+void PcInt::handlePCINT0()
 {
   for (uint8_t nr = 0; nr < 8; ++nr) {
     if (_funcs0[nr]) {
@@ -186,47 +170,47 @@ ISR(PCINT0_vect)
 }
 #endif
 
-#if defined(PCINT1_vect)
-inline void PcInt::handlePCINT1()
-{
-  for (uint8_t nr = 0; nr < 8; ++nr) {
-    if (_funcs1[nr]) {
-      (*_funcs1[nr])();
-    }
-  }
-}
-ISR(PCINT1_vect)
-{
-  PcInt::handlePCINT1();
-}
-#endif
+//#if defined(PCINT1_vect)
+//void PcInt::handlePCINT1()
+//{
+//  for (uint8_t nr = 0; nr < 8; ++nr) {
+//    if (_funcs1[nr]) {
+//      (*_funcs1[nr])();
+//    }
+//  }
+//}
+//ISR(PCINT1_vect)
+//{
+//  PcInt::handlePCINT1();
+//}
+//#endif
 
-#if defined(PCINT2_vect)
-inline void PcInt::handlePCINT2()
-{
-  for (uint8_t nr = 0; nr < 8; ++nr) {
-    if (_funcs2[nr]) {
-      (*_funcs2[nr])();
-    }
-  }
-}
-ISR(PCINT2_vect)
-{
-  PcInt::handlePCINT2();
-}
-#endif
+//#if defined(PCINT2_vect)
+//void PcInt::handlePCINT2()
+//{
+//  for (uint8_t nr = 0; nr < 8; ++nr) {
+//    if (_funcs2[nr]) {
+//      (*_funcs2[nr])();
+//    }
+//  }
+//}
+//ISR(PCINT2_vect)
+//{
+//  PcInt::handlePCINT2();
+//}
+//#endif
 
-#if defined(PCINT3_vect)
-inline void PcInt::handlePCINT3()
-{
-  for (uint8_t nr = 0; nr < 8; ++nr) {
-    if (_funcs3[nr]) {
-      (*_funcs3[nr])();
-    }
-  }
-}
-ISR(PCINT3_vect)
-{
-  PcInt::handlePCINT3();
-}
-#endif
+//#if defined(PCINT3_vect)
+//void PcInt::handlePCINT3()
+//{
+//  for (uint8_t nr = 0; nr < 8; ++nr) {
+//    if (_funcs3[nr]) {
+//      (*_funcs3[nr])();
+//    }
+//  }
+//}
+//ISR(PCINT3_vect)
+//{
+//  PcInt::handlePCINT3();
+//}
+//#endif
