@@ -1,8 +1,7 @@
 PcInt Library
 =============
 
-This is an Arduino library to administrate and handle Pin Change
-Interrupts.
+This is an Arduino library to administrate and handle Pin Change Interrupts as needed to allow the Mayfly to sleep and save battery power.
 
 This is modified from the Sodaq library to work properly with SoftwareSerialMod and SDI-12Mod on the Mayfly
 
