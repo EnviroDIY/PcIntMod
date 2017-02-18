@@ -23,8 +23,8 @@
  * Boston, MA  02111-1307  USA
  */
 
-#ifndef SODAQ_PCINT_MOD_H_
-#define SODAQ_PCINT_MOD_H_
+#ifndef SODAQ_PCINT_PCINT0_H_
+#define SODAQ_PCINT_PCINT0_H_
 
 #include <stdint.h>
 
@@ -57,4 +57,4 @@ private:
 //#endif
 };
 
-#endif /* SODAQ_PCINT_MOD_H_ */
+#endif /* SODAQ_PCINT_PCINT0_H_ */
