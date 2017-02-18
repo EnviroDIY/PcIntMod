@@ -50,7 +50,7 @@
 #include <avr/interrupt.h>
 #include <Arduino.h>
 
-#include "Sodaq_PcInt_Mod.h"
+#include "Sodaq_PcInt_PCINT0.h"
 
 #if defined(PCINT0_vect)
 void   (*PcInt::_funcs0[8])(void);
