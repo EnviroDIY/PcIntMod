@@ -23,8 +23,14 @@
  * Boston, MA  02111-1307  USA
  */
 
-#ifndef SODAQ_PCINT_PCINT0_H_
-#define SODAQ_PCINT_PCINT0_H_
+#ifndef SODAQ_PCINT_H_
+#warning "DO NOT IMPORT BOTH Sodaq_PcInt_h AND Sodaq_PcInt_PCINT0_h!"
+#warning "IMPORTING BOTH WILL CAUSE ERRORS!"
+#warning "YOU HAVE BEEN WARNED!"
+#endif
+
+#ifndef Sodaq_PcInt_PCINT0_h
+#define Sodaq_PcInt_PCINT0_h
 
 #include <stdint.h>
 
